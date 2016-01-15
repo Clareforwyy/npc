@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+<input type="button" value="↑">
+<input type="button" value="↓">
+<input type="button" value="←">
+<input type="button" value="→">
+<canvas id="demo"></canvas>
+<script>
+  var demo = document.querySelector('#demo');
+  var btn = document.querySelectorAll("input");
+  console.log(btn[0])
+  demo.width = 600;
+  demo.height = 600;
+  demo.style.border = "1px solid #000";
+
+  var cxt = demo.getContext("2d");
+  var img = new Image();
+  img.src = "NPCrabbitbaby.png";
+  var cenX = demo.width/2;
+  var cenY = demo.height/2;
+
+
+  img.onload = function (){
+    var imgWidth = img.width/4;
+    var imgHight = img.height/4;
+    var step = 5;
+    var statuX = 0;
+    var statuY = 0;
+    setInterval(function(){
+      cxt.clearRect(cenX,cenY-10,imgWidth+15,imgHight+15)
+      cxt.drawImage(
+        img,
+        imgWidth*statuX,imgHight*statuY,
+        imgWidth,imgHight,
+        cenX,cenY,
+        imgWidth,imgHight
+        );
+      statuX ++;
+      statuX %= 4;
+    },1000/step)
+    btn[0].onclick =function(){
+      statuY = 3;
+      cenY -= 5;
+      console.log(statuY);
+   }
+    btn[1].onclick =function(){
+      statuY = 0;
+      cenY += 5;
+   }
+    btn[2].onclick =function(){
+      statuY = 1;
+      cenX -= 5;
+   }
+    btn[3].onclick =function(){
+      statuY = 2;
+      cenX += 5;
+   }
+  }
+
+</script>
+</body>
+</html>
